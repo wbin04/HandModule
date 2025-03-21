@@ -14,7 +14,7 @@ class HandDetector:
         
         if results.multi_hand_landmarks:
             for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
-                hand_type = handedness.classification[0].label
+                hand_type = "Right" if handedness.classification[0].label == "Left" else "Left"
                 hand_info = {
                     "lmList": [(int(lm.x * img.shape[1]), int(lm.y * img.shape[0])) for lm in hand_landmarks.landmark],
                     "bbox": self._calculate_bounding_box(hand_landmarks, img),
